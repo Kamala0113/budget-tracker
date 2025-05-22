@@ -18,6 +18,7 @@ export default function AddTransaction({
     setDescription("");
     setAmount("");
   };
+  const isAddDisable = description.trim() && amount.trim()
   return (
     <div className="bg-white shadow rounded p-4 w-full max-w-md">
       <h3 className="font-semibold mb-2">Add Transaction</h3>
@@ -39,6 +40,7 @@ export default function AddTransaction({
         <button
           type="submit"
           className="w-full bg-blue-600 text-white py-1 rounded"
+          disabled={!isAddDisable}
         >
           Add Transaction
         </button>
