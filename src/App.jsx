@@ -10,16 +10,21 @@ function App() {
 
   const addTransaction = (newTransaction) => {
     
-
     setTransactions([newTransaction, ...transactions]);
     
-  };
+  }
+
+  const deleteTransaction = (transactionToDelete)=>{
+    setTransactions((prev) =>
+      prev.filter((tx) => tx.id !== transactionToDelete)
+    );
+  }
 
   const getIncome = () =>
-    transactions.filter(t => t.amount > 0).reduce((acc, t) => acc + t.amount, 0);
+    transactions.filter(t => t.amount > 0).reduce((acc, t) => acc + t.amount, 0)
 
   const getExpense = () =>
-    transactions.filter(t => t.amount < 0).reduce((acc, t) => acc + t.amount, 0);
+    transactions.filter(t => t.amount < 0).reduce((acc, t) => acc + t.amount, 0)
 
   const balance = (getIncome() + getExpense()).toFixed(2)
   const income = getIncome().toFixed(2)
@@ -39,7 +44,7 @@ function App() {
       <AddTransaction addTransaction={addTransaction} />
 
        {/* Transaction List */}
-       <TransactionList transactions={transactions}/>
+       <TransactionList transactions={transactions} deleteTransaction={deleteTransaction}/>
 
     </div>
   );
