@@ -1,10 +1,12 @@
 import { useState } from "react";
 import ConfirmationModal from "./ConfirmationModal.jsx";
 import { FaTrash } from "react-icons/fa";
+import { useTransactions } from '../context/Transactions.jsx';
 
-export default function TransactionList({ transactions , deleteTransaction}) {
+export default function TransactionList() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [transactionToDelete, setTransactionToDelete] = useState(null);
+  const { transactions, dispatch} = useTransactions()
 
   const openModal = (id) => {
     setTransactionToDelete(id);
@@ -17,7 +19,7 @@ export default function TransactionList({ transactions , deleteTransaction}) {
   };
 
   const confirmDelete = () => {
-    deleteTransaction(transactionToDelete)
+    dispatch({ type: 'DELETE_TRANSACTION', payload: transactionToDelete })
     closeModal();
   };
 
